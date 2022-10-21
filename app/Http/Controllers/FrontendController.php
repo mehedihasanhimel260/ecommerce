@@ -171,4 +171,10 @@ class FrontendController extends Controller
         $productCount = Cart::where('user_id', auth()->check() ? auth()->user()->id : null)->orWhere('ip_address', request()->ip)->get()->count();
         return view('frontend.home.shop', compact('productCount'));
     }
+    public function allcategorises()
+    {
+
+        $allcategorises = Category::get();
+        return  $allcategorises;
+    }
 }

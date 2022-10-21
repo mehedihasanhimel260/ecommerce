@@ -36,6 +36,7 @@ Route::post('/shiping/store', [FrontendController::class, 'shippingStore']);
 Route::get('/singleproduct/{id}', [FrontendController::class, 'singleProduct']);
 Route::get('/get/search/products/', [FrontendController::class, 'searchProduct']);
 Route::get('/allproduct/shop', [FrontendController::class, 'allProductShop']);
+Route::get('/get/all/categorises', [FrontendController::class, 'allcategorises']);
 
 //FrontendController End
 

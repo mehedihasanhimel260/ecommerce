@@ -5348,6 +5348,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5674,76 +5676,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {},
-  created: function created() {},
-  methods: {}
+  data: function data() {
+    return {
+      categorises: []
+    };
+  },
+  created: function created() {
+    this.getAllCategorises();
+  },
+  methods: {
+    getAllCategorises: function getAllCategorises() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/all/categorises', {
+        params: {
+          search: this.search
+        }
+      }).then(function (response) {
+        _this.categorises = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -28841,11 +28798,53 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid pt-5" }, [
     _c("div", { staticClass: "row px-xl-5" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "col-lg-3 col-md-12" }, [
+        _c("div", { staticClass: "border-bottom mb-4 pb-4" }, [
+          _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
+            _vm._v("Filter by price"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.categorises, function (category) {
+                return _c(
+                  "div",
+                  {
+                    key: category.id,
+                    staticClass:
+                      "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+                  },
+                  [
+                    _c("input", {
+                      staticClass: "custom-control-input",
+                      attrs: { type: "checkbox", id: category.id },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "custom-control-label",
+                        attrs: { for: category.id },
+                      },
+                      [_vm._v(_vm._s(category.name))]
+                    ),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-9 col-md-12" }, [
         _c("div", { staticClass: "row pb-3" }, [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
             _c("div", { staticClass: "card product-item border-0 mb-4" }, [
@@ -28863,13 +28862,11 @@ var render = function () {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
               _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
             ]),
           ]),
-          _vm._v(" "),
-          _vm._m(4),
           _vm._v(" "),
           _vm._m(5),
           _vm._v(" "),
@@ -28886,6 +28883,8 @@ var render = function () {
           _vm._m(11),
           _vm._v(" "),
           _vm._m(12),
+          _vm._v(" "),
+          _vm._m(13),
         ]),
       ]),
     ]),
@@ -28896,515 +28895,186 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-12" }, [
-      _c("div", { staticClass: "border-bottom mb-4 pb-4" }, [
-        _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
-          _vm._v("Filter by price"),
-        ]),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+      },
+      [
+        _c("input", {
+          staticClass: "custom-control-input",
+          attrs: { type: "checkbox", checked: "", id: "price-all" },
+        }),
         _vm._v(" "),
-        _c("form", [
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", checked: "", id: "price-all" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "price-all" },
-                },
-                [_vm._v("All Price")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("1000"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "price-1" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "price-1" },
-                },
-                [_vm._v("$0 - $100")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("150"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "price-2" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "price-2" },
-                },
-                [_vm._v("$100 - $200")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("295"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "price-3" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "price-3" },
-                },
-                [_vm._v("$200 - $300")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("246"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "price-4" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "price-4" },
-                },
-                [_vm._v("$300 - $400")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("145"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "price-5" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "price-5" },
-                },
-                [_vm._v("$400 - $500")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("168"),
-              ]),
-            ]
-          ),
+        _c(
+          "label",
+          { staticClass: "custom-control-label", attrs: { for: "price-all" } },
+          [_vm._v("All Price")]
+        ),
+        _vm._v(" "),
+        _c("span", { staticClass: "badge border font-weight-normal" }, [
+          _vm._v("1000"),
         ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-5" }, [
+      _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
+        _vm._v("Filter by size"),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "border-bottom mb-4 pb-4" }, [
-        _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
-          _vm._v("Filter by color"),
-        ]),
+      _c("form", [
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", checked: "", id: "size-all" },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "size-all" },
+              },
+              [_vm._v("All Size")]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge border font-weight-normal" }, [
+              _vm._v("1000"),
+            ]),
+          ]
+        ),
         _vm._v(" "),
-        _c("form", [
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", checked: "", id: "color-all" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "price-all" },
-                },
-                [_vm._v("All Color")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("1000"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "color-1" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "color-1" },
-                },
-                [_vm._v("Black")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("150"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "color-2" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "color-2" },
-                },
-                [_vm._v("White")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("295"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "color-3" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "color-3" },
-                },
-                [_vm._v("Red")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("246"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "color-4" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "color-4" },
-                },
-                [_vm._v("Blue")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("145"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "color-5" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "color-5" },
-                },
-                [_vm._v("Green")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("168"),
-              ]),
-            ]
-          ),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "mb-5" }, [
-        _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
-          _vm._v("Filter by size"),
-        ]),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "size-1" },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "custom-control-label", attrs: { for: "size-1" } },
+              [_vm._v("XS")]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge border font-weight-normal" }, [
+              _vm._v("150"),
+            ]),
+          ]
+        ),
         _vm._v(" "),
-        _c("form", [
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", checked: "", id: "size-all" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "size-all" },
-                },
-                [_vm._v("All Size")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("1000"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "size-1" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "size-1" },
-                },
-                [_vm._v("XS")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("150"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "size-2" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "size-2" },
-                },
-                [_vm._v("S")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("295"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "size-3" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "size-3" },
-                },
-                [_vm._v("M")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("246"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "size-4" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "size-4" },
-                },
-                [_vm._v("L")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("145"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-checkbox d-flex align-items-center justify-content-between",
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "size-5" },
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "size-5" },
-                },
-                [_vm._v("XL")]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge border font-weight-normal" }, [
-                _vm._v("168"),
-              ]),
-            ]
-          ),
-        ]),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "size-2" },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "custom-control-label", attrs: { for: "size-2" } },
+              [_vm._v("S")]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge border font-weight-normal" }, [
+              _vm._v("295"),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "size-3" },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "custom-control-label", attrs: { for: "size-3" } },
+              [_vm._v("M")]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge border font-weight-normal" }, [
+              _vm._v("246"),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "size-4" },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "custom-control-label", attrs: { for: "size-4" } },
+              [_vm._v("L")]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge border font-weight-normal" }, [
+              _vm._v("145"),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center justify-content-between",
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "size-5" },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "custom-control-label", attrs: { for: "size-5" } },
+              [_vm._v("XL")]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "badge border font-weight-normal" }, [
+              _vm._v("168"),
+            ]),
+          ]
+        ),
       ]),
     ])
   },
@@ -42394,6 +42064,18 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
