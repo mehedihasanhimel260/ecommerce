@@ -37,6 +37,8 @@ Route::get('/singleproduct/{id}', [FrontendController::class, 'singleProduct']);
 Route::get('/get/search/products/', [FrontendController::class, 'searchProduct']);
 Route::get('/allproduct/shop', [FrontendController::class, 'allProductShop']);
 Route::get('/get/all/categorises', [FrontendController::class, 'allcategorises']);
+Route::get('/get/all/brands', [FrontendController::class, 'allBrands']);
+Route::get('/get/all/products', [FrontendController::class, 'getAllProducts']);
 
 //FrontendController End
 

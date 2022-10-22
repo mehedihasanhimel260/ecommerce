@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Billing;
+use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Frontend;
@@ -176,5 +177,15 @@ class FrontendController extends Controller
 
         $allcategorises = Category::get();
         return  $allcategorises;
+    }
+    public function allBrands()
+    {
+        $allBrands = Brand::get();
+        return $allBrands;
+    }
+    public function getAllProducts()
+    {
+        $getAllProducts = Product::get();
+        return $getAllProducts;
     }
 }

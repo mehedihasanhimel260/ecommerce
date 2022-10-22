@@ -5478,224 +5478,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      categorises: []
+      categorises: [],
+      Brands: [],
+      Products: []
     };
   },
   created: function created() {
     this.getAllCategorises();
+    this.getAllBrands();
+    this.getAllProducts();
   },
   methods: {
     getAllCategorises: function getAllCategorises() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/all/categorises', {
-        params: {
-          search: this.search
-        }
-      }).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/all/categorises').then(function (response) {
         _this.categorises = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getAllBrands: function getAllBrands() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/all/brands').then(function (response) {
+        _this2.Brands = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getAllProducts: function getAllProducts() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/all/products').then(function (response) {
+        _this3.Products = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -28801,7 +28621,7 @@ var render = function () {
       _c("div", { staticClass: "col-lg-3 col-md-12" }, [
         _c("div", { staticClass: "border-bottom mb-4 pb-4" }, [
           _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
-            _vm._v("Filter by price"),
+            _vm._v("Filter by Category"),
           ]),
           _vm._v(" "),
           _c(
@@ -28839,53 +28659,117 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "mb-5" }, [
+          _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
+            _vm._v("Filter by Brand "),
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._l(_vm.Brands, function (Brand) {
+                return _c(
+                  "div",
+                  {
+                    key: Brand.id,
+                    staticClass:
+                      "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+                  },
+                  [
+                    _c("input", {
+                      staticClass: "custom-control-input",
+                      attrs: { type: "checkbox", id: Brand.id },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "custom-control-label",
+                        attrs: { for: Brand.id },
+                      },
+                      [_vm._v(_vm._s(Brand.name))]
+                    ),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
+        ]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-9 col-md-12" }, [
-        _c("div", { staticClass: "row pb-3" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-            _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-              _c(
+        _c(
+          "div",
+          { staticClass: "row pb-3" },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._l(_vm.Products, function (Product) {
+              return _c(
                 "div",
                 {
-                  staticClass:
-                    "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
+                  key: Product.id,
+                  staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1",
                 },
                 [
-                  _c("img", {
-                    staticClass: "img-fluid w-100",
-                    attrs: { src: "img/product - 1.jpg", alt: "" },
-                  }),
+                  _c(
+                    "div",
+                    { staticClass: "card product-item border-0 mb-4" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img-fluid w-100",
+                            attrs: {
+                              src: "/public/Image/" + Product.image,
+                              alt: "",
+                            },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "card-body border-left border-right text-center p-0 pt-4 pb-3",
+                        },
+                        [
+                          _c("h6", { staticClass: "text-truncate mb-3" }, [
+                            _vm._v(_vm._s(Product.name)),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex justify-content-center" },
+                            [
+                              _c("h6", [_vm._v("$" + _vm._s(Product.price))]),
+                              _vm._v(" "),
+                              _vm._m(3, true),
+                            ]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(4, true),
+                    ]
+                  ),
                 ]
-              ),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4),
-            ]),
-          ]),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _vm._m(6),
-          _vm._v(" "),
-          _vm._m(7),
-          _vm._v(" "),
-          _vm._m(8),
-          _vm._v(" "),
-          _vm._m(9),
-          _vm._v(" "),
-          _vm._m(10),
-          _vm._v(" "),
-          _vm._m(11),
-          _vm._v(" "),
-          _vm._m(12),
-          _vm._v(" "),
-          _vm._m(13),
-        ]),
+              )
+            }),
+            _vm._v(" "),
+            _vm._m(5),
+          ],
+          2
+        ),
       ]),
     ]),
   ])
@@ -28910,7 +28794,7 @@ var staticRenderFns = [
         _c(
           "label",
           { staticClass: "custom-control-label", attrs: { for: "price-all" } },
-          [_vm._v("All Price")]
+          [_vm._v("All Category")]
         ),
         _vm._v(" "),
         _c("span", { staticClass: "badge border font-weight-normal" }, [
@@ -28923,160 +28807,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-5" }, [
-      _c("h5", { staticClass: "font-weight-semi-bold mb-4" }, [
-        _vm._v("Filter by size"),
-      ]),
-      _vm._v(" "),
-      _c("form", [
-        _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "checkbox", checked: "", id: "size-all" },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "custom-control-label",
-                attrs: { for: "size-all" },
-              },
-              [_vm._v("All Size")]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "badge border font-weight-normal" }, [
-              _vm._v("1000"),
-            ]),
-          ]
-        ),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
+      },
+      [
+        _c("input", {
+          staticClass: "custom-control-input",
+          attrs: { type: "checkbox", checked: "", id: "size-all" },
+        }),
         _vm._v(" "),
         _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "checkbox", id: "size-1" },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-control-label", attrs: { for: "size-1" } },
-              [_vm._v("XS")]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "badge border font-weight-normal" }, [
-              _vm._v("150"),
-            ]),
-          ]
+          "label",
+          { staticClass: "custom-control-label", attrs: { for: "size-all" } },
+          [_vm._v("All Brand")]
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "checkbox", id: "size-2" },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-control-label", attrs: { for: "size-2" } },
-              [_vm._v("S")]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "badge border font-weight-normal" }, [
-              _vm._v("295"),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "checkbox", id: "size-3" },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-control-label", attrs: { for: "size-3" } },
-              [_vm._v("M")]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "badge border font-weight-normal" }, [
-              _vm._v("246"),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3",
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "checkbox", id: "size-4" },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-control-label", attrs: { for: "size-4" } },
-              [_vm._v("L")]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "badge border font-weight-normal" }, [
-              _vm._v("145"),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-checkbox d-flex align-items-center justify-content-between",
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "checkbox", id: "size-5" },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-control-label", attrs: { for: "size-5" } },
-              [_vm._v("XL")]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "badge border font-weight-normal" }, [
-              _vm._v("168"),
-            ]),
-          ]
-        ),
-      ]),
-    ])
+        _c("span", { staticClass: "badge border font-weight-normal" }, [
+          _vm._v("1000"),
+        ]),
+      ]
+    )
   },
   function () {
     var _vm = this
@@ -29163,26 +28916,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "card-body border-left border-right text-center p-0 pt-4 pb-3",
-      },
-      [
-        _c("h6", { staticClass: "text-truncate mb-3" }, [
-          _vm._v("Colorful Stylish Shirt"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex justify-content-center" }, [
-          _c("h6", [_vm._v("$123.00")]),
-          _vm._v(" "),
-          _c("h6", { staticClass: "text-muted ml-2" }, [
-            _c("del", [_vm._v("$123.00")]),
-          ]),
-        ]),
-      ]
-    )
+    return _c("h6", { staticClass: "text-muted ml-2" }, [
+      _c("del", [_vm._v("$123.00")]),
+    ])
   },
   function () {
     var _vm = this
@@ -29214,582 +28950,6 @@ var staticRenderFns = [
         ),
       ]
     )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: "img/product-2.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: " img/product-3.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: " img/product-4.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: " img/product-5.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: " img/product-6.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: " img/product-7.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: " img/product-8.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 pb-1" }, [
-      _c("div", { staticClass: "card product-item border-0 mb-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header product-img position-relative overflow-hidden bg-transparent border p-0",
-          },
-          [
-            _c("img", {
-              staticClass: "img-fluid w-100",
-              attrs: { src: " img/product-1.jpg", alt: "" },
-            }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-body border-left border-right text-center p-0 pt-4 pb-3",
-          },
-          [
-            _c("h6", { staticClass: "text-truncate mb-3" }, [
-              _vm._v("Colorful Stylish Shirt"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-center" }, [
-              _c("h6", [_vm._v("$123.00")]),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-muted ml-2" }, [
-                _c("del", [_vm._v("$123.00")]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-footer d-flex justify-content-between bg-light border",
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", { staticClass: "fas fa-eye text-primary mr-1" }),
-                _vm._v("View\n                                Detail"),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-sm text-dark p-0", attrs: { href: "" } },
-              [
-                _c("i", {
-                  staticClass: "fas fa-shopping-cart text-primary mr-1",
-                }),
-                _vm._v("Add To Cart"),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
   },
   function () {
     var _vm = this
