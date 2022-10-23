@@ -188,4 +188,18 @@ class FrontendController extends Controller
         $getAllProducts = Product::get();
         return $getAllProducts;
     }
+    public function getAllProductFriltaring(Request $request)
+    {
+        $products = Product::with('category', 'brand')->where(function ($cat) use ($request) {
+            if ($request->category_id) {
+                $cat->whereIn('category_id', $request->category_id);
+            }
+        })->where(function ($brand) use ($request) {
+
+            if ($request->brand_id) {
+                $brand->whereIn('brand_id', $request->brand_id);
+            }
+        })->get();
+        return $products;
+    }
 }

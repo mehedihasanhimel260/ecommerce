@@ -39,6 +39,7 @@ Route::get('/allproduct/shop', [FrontendController::class, 'allProductShop']);
 Route::get('/get/all/categorises', [FrontendController::class, 'allcategorises']);
 Route::get('/get/all/brands', [FrontendController::class, 'allBrands']);
 Route::get('/get/all/products', [FrontendController::class, 'getAllProducts']);
+Route::post('/get/filter/products', [FrontendController::class, 'getAllProductFriltaring']);
 
 //FrontendController End
 

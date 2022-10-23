@@ -16,8 +16,9 @@
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
                             v-for="category in categorises" :key="category.id">
-                            <input type="checkbox" class="custom-control-input" :id="category.id">
-                            <label class="custom-control-label" :for="category.id">{{ category.name }}</label>
+                            <input type="checkbox" class="custom-control-input" :id="'cr'+category.id"
+                                @change="getFilterProducts()" :value="category.id" v-model="categoryId">
+                            <label class="custom-control-label" :for="'cr'+category.id">{{ category.name }}</label>
                         </div>
                     </form>
                 </div>
@@ -28,16 +29,19 @@
                 <div class="mb-5">
                     <h5 class="font-weight-semi-bold mb-4">Filter by Brand </h5>
                     <form>
+
+
                         <div
                             class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="size-all">
-                            <label class="custom-control-label" for="size-all">All Brand</label>
+                            <input type="checkbox" class="custom-control-input" checked id="color-all">
+                            <label class="custom-control-label" for="color-all">All Brand</label>
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
                             v-for="Brand in Brands" :key="Brand.id">
-                            <input type="checkbox" class="custom-control-input" :id="Brand.id">
-                            <label class="custom-control-label" :for="Brand.id">{{ Brand.name }}</label>
+                            <input type="checkbox" class="custom-control-input" :id="'br'+Brand.id"
+                                @change="getFilterProducts()" :value="Brand.id" v-model="BrandId">
+                            <label class="custom-control-label" :for="'br'+Brand.id">{{ Brand.name }}</label>
                         </div>
                     </form>
                 </div>
@@ -136,6 +140,8 @@ export default {
             categorises: [],
             Brands: [],
             Products: [],
+            categoryId: [],
+            BrandId: [],
         }
     },
 
@@ -143,6 +149,7 @@ export default {
         this.getAllCategorises();
         this.getAllBrands();
         this.getAllProducts();
+        // this.getFilterProducts();
     },
     methods: {
         getAllCategorises() {
@@ -165,6 +172,14 @@ export default {
             axios.get('/get/all/products')
                 .then(response => {
                     this.Products = response.data
+                }).catch(error => {
+                    console.log(error)
+                })
+        },
+        getFilterProducts() {
+            axios.post('/get/filter/products', { category_id: this.categoryId, brand_id: this.BrandId })
+                .then(response => {
+                    console.log(response)
                 }).catch(error => {
                     console.log(error)
                 })

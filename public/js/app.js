@@ -5478,19 +5478,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       categorises: [],
       Brands: [],
-      Products: []
+      Products: [],
+      categoryId: [],
+      BrandId: []
     };
   },
   created: function created() {
     this.getAllCategorises();
     this.getAllBrands();
-    this.getAllProducts();
+    this.getAllProducts(); // this.getFilterProducts();
   },
   methods: {
     getAllCategorises: function getAllCategorises() {
@@ -5516,6 +5522,16 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/all/products').then(function (response) {
         _this3.Products = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getFilterProducts: function getFilterProducts() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/get/filter/products', {
+        category_id: this.categoryId,
+        brand_id: this.BrandId
+      }).then(function (response) {
+        console.log(response);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -28639,15 +28655,55 @@ var render = function () {
                   },
                   [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.categoryId,
+                          expression: "categoryId",
+                        },
+                      ],
                       staticClass: "custom-control-input",
-                      attrs: { type: "checkbox", id: category.id },
+                      attrs: { type: "checkbox", id: "cr" + category.id },
+                      domProps: {
+                        value: category.id,
+                        checked: Array.isArray(_vm.categoryId)
+                          ? _vm._i(_vm.categoryId, category.id) > -1
+                          : _vm.categoryId,
+                      },
+                      on: {
+                        change: [
+                          function ($event) {
+                            var $$a = _vm.categoryId,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = category.id,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.categoryId = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.categoryId = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.categoryId = $$c
+                            }
+                          },
+                          function ($event) {
+                            return _vm.getFilterProducts()
+                          },
+                        ],
+                      },
                     }),
                     _vm._v(" "),
                     _c(
                       "label",
                       {
                         staticClass: "custom-control-label",
-                        attrs: { for: category.id },
+                        attrs: { for: "cr" + category.id },
                       },
                       [_vm._v(_vm._s(category.name))]
                     ),
@@ -28679,15 +28735,55 @@ var render = function () {
                   },
                   [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.BrandId,
+                          expression: "BrandId",
+                        },
+                      ],
                       staticClass: "custom-control-input",
-                      attrs: { type: "checkbox", id: Brand.id },
+                      attrs: { type: "checkbox", id: "br" + Brand.id },
+                      domProps: {
+                        value: Brand.id,
+                        checked: Array.isArray(_vm.BrandId)
+                          ? _vm._i(_vm.BrandId, Brand.id) > -1
+                          : _vm.BrandId,
+                      },
+                      on: {
+                        change: [
+                          function ($event) {
+                            var $$a = _vm.BrandId,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = Brand.id,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.BrandId = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.BrandId = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.BrandId = $$c
+                            }
+                          },
+                          function ($event) {
+                            return _vm.getFilterProducts()
+                          },
+                        ],
+                      },
                     }),
                     _vm._v(" "),
                     _c(
                       "label",
                       {
                         staticClass: "custom-control-label",
-                        attrs: { for: Brand.id },
+                        attrs: { for: "br" + Brand.id },
                       },
                       [_vm._v(_vm._s(Brand.name))]
                     ),
@@ -28816,12 +28912,12 @@ var staticRenderFns = [
       [
         _c("input", {
           staticClass: "custom-control-input",
-          attrs: { type: "checkbox", checked: "", id: "size-all" },
+          attrs: { type: "checkbox", checked: "", id: "color-all" },
         }),
         _vm._v(" "),
         _c(
           "label",
-          { staticClass: "custom-control-label", attrs: { for: "size-all" } },
+          { staticClass: "custom-control-label", attrs: { for: "color-all" } },
           [_vm._v("All Brand")]
         ),
         _vm._v(" "),
