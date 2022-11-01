@@ -16,9 +16,9 @@
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
                             v-for="category in categorises" :key="category.id">
-                            <input type="checkbox" class="custom-control-input" :id="'cr'+category.id"
+                            <input type="checkbox" class="custom-control-input" :id="'cr' + category.id"
                                 @change="getFilterProducts()" :value="category.id" v-model="categoryId">
-                            <label class="custom-control-label" :for="'cr'+category.id">{{ category.name }}</label>
+                            <label class="custom-control-label" :for="'cr' + category.id">{{ category.name }}</label>
                         </div>
                     </form>
                 </div>
@@ -39,9 +39,9 @@
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
                             v-for="Brand in Brands" :key="Brand.id">
-                            <input type="checkbox" class="custom-control-input" :id="'br'+Brand.id"
+                            <input type="checkbox" class="custom-control-input" :id="'br' + Brand.id"
                                 @change="getFilterProducts()" :value="Brand.id" v-model="BrandId">
-                            <label class="custom-control-label" :for="'br'+Brand.id">{{ Brand.name }}</label>
+                            <label class="custom-control-label" :for="'br' + Brand.id">{{ Brand.name }}</label>
                         </div>
                     </form>
                 </div>
@@ -179,7 +179,12 @@ export default {
         getFilterProducts() {
             axios.post('/get/filter/products', { category_id: this.categoryId, brand_id: this.BrandId })
                 .then(response => {
-                    console.log(response)
+                    if (this.categoryId.length > 0) {
+                        this.Products = response.data
+                    } else {
+                        this.getAllProducts()
+                    }
+
                 }).catch(error => {
                     console.log(error)
                 })

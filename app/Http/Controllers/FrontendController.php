@@ -6,7 +6,6 @@ use App\Models\Billing;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Category;
-use App\Models\Frontend;
 use App\Models\Order;
 use App\Models\Orderditaile;
 use App\Models\Product;
@@ -202,4 +201,22 @@ class FrontendController extends Controller
         })->get();
         return $products;
     }
+
+    // public function productsFiltering(Request $request)
+    // {
+    //     $products = Product::with('category', 'brand')->where(function ($cat) use ($request) {
+    //         if ($request->category_id) {
+    //             $cat->whereIn('category_id', $request->category_id);
+    //         }
+    //     })->where(function ($brand) use ($request) {
+    //         if ($request->brand_id) {
+    //             $brand->whereIn('brand_id', $request->brand_id);
+    //         }
+    //     })->get();
+    //     return $products;
+    // }
+
+
+
+
 }

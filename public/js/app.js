@@ -5527,11 +5527,17 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getFilterProducts: function getFilterProducts() {
+      var _this4 = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/get/filter/products', {
         category_id: this.categoryId,
         brand_id: this.BrandId
       }).then(function (response) {
-        console.log(response);
+        if (_this4.categoryId.length > 0) {
+          _this4.Products = response.data;
+        } else {
+          _this4.getAllProducts();
+        }
       })["catch"](function (error) {
         console.log(error);
       });
